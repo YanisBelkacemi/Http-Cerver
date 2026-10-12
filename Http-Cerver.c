@@ -127,9 +127,13 @@ void server_reponse(){
 http_request* parse(char* buffer){
 	//here creating a new buffer so that changes wont be applied to our original buffer
 	char *new_buffer = malloc(strlen(buffer) + 1);
+	if (new_buffer == NULL || buffer == NULL){
+		return NULL ;
+	}
 	strcpy(new_buffer , buffer);
 	// getting just the first line
 	char* first_line = strchr(new_buffer , '\r');
+
  	if (first_line != NULL){
 
  		*first_line = '\0';
@@ -230,7 +234,7 @@ enum methods get_http_method(char* m){
 		return response;
 
 	}else{
-		response = PUT;
+		response = ERROR;
 		return response;
 
 	}
