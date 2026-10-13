@@ -86,30 +86,30 @@ CMakeFiles/server.dir/Http-Cerver.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/server.dir/Http-Cerver.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Http-Cerver.c" -o CMakeFiles/server.dir/Http-Cerver.c.s
 
-CMakeFiles/server.dir/routing.c.o: CMakeFiles/server.dir/flags.make
-CMakeFiles/server.dir/routing.c.o: /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/routing.c
-CMakeFiles/server.dir/routing.c.o: CMakeFiles/server.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/routing.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/routing.c.o -MF CMakeFiles/server.dir/routing.c.o.d -o CMakeFiles/server.dir/routing.c.o -c "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/routing.c"
+CMakeFiles/server.dir/routing/source/routing.c.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/routing/source/routing.c.o: /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/routing/source/routing.c
+CMakeFiles/server.dir/routing/source/routing.c.o: CMakeFiles/server.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/server.dir/routing/source/routing.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/server.dir/routing/source/routing.c.o -MF CMakeFiles/server.dir/routing/source/routing.c.o.d -o CMakeFiles/server.dir/routing/source/routing.c.o -c "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/routing/source/routing.c"
 
-CMakeFiles/server.dir/routing.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/server.dir/routing.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/routing.c" > CMakeFiles/server.dir/routing.c.i
+CMakeFiles/server.dir/routing/source/routing.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/server.dir/routing/source/routing.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/routing/source/routing.c" > CMakeFiles/server.dir/routing/source/routing.c.i
 
-CMakeFiles/server.dir/routing.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/server.dir/routing.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/routing.c" -o CMakeFiles/server.dir/routing.c.s
+CMakeFiles/server.dir/routing/source/routing.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/server.dir/routing/source/routing.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/routing/source/routing.c" -o CMakeFiles/server.dir/routing/source/routing.c.s
 
 # Object files for target server
 server_OBJECTS = \
 "CMakeFiles/server.dir/Http-Cerver.c.o" \
-"CMakeFiles/server.dir/routing.c.o"
+"CMakeFiles/server.dir/routing/source/routing.c.o"
 
 # External object files for target server
 server_EXTERNAL_OBJECTS =
 
 server: CMakeFiles/server.dir/Http-Cerver.c.o
-server: CMakeFiles/server.dir/routing.c.o
+server: CMakeFiles/server.dir/routing/source/routing.c.o
 server: CMakeFiles/server.dir/build.make
 server: liblibs.a
 server: liblibs.a

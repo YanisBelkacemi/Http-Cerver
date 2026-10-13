@@ -190,29 +190,29 @@ libs/classes/source/classes.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libs.dir/build.make CMakeFiles/libs.dir/libs/classes/source/classes.c.s
 .PHONY : libs/classes/source/classes.c.s
 
-routing.o: routing.c.o
-.PHONY : routing.o
+routing/source/routing.o: routing/source/routing.c.o
+.PHONY : routing/source/routing.o
 
 # target to build an object file
-routing.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/routing.c.o
-.PHONY : routing.c.o
+routing/source/routing.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/routing/source/routing.c.o
+.PHONY : routing/source/routing.c.o
 
-routing.i: routing.c.i
-.PHONY : routing.i
+routing/source/routing.i: routing/source/routing.c.i
+.PHONY : routing/source/routing.i
 
 # target to preprocess a source file
-routing.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/routing.c.i
-.PHONY : routing.c.i
+routing/source/routing.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/routing/source/routing.c.i
+.PHONY : routing/source/routing.c.i
 
-routing.s: routing.c.s
-.PHONY : routing.s
+routing/source/routing.s: routing/source/routing.c.s
+.PHONY : routing/source/routing.s
 
 # target to generate assembly for a file
-routing.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/routing.c.s
-.PHONY : routing.c.s
+routing/source/routing.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/routing/source/routing.c.s
+.PHONY : routing/source/routing.c.s
 
 # Help Target
 help:
@@ -230,9 +230,9 @@ help:
 	@echo "... libs/classes/source/classes.o"
 	@echo "... libs/classes/source/classes.i"
 	@echo "... libs/classes/source/classes.s"
-	@echo "... routing.o"
-	@echo "... routing.i"
-	@echo "... routing.s"
+	@echo "... routing/source/routing.o"
+	@echo "... routing/source/routing.i"
+	@echo "... routing/source/routing.s"
 .PHONY : help
 
 

@@ -9,7 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Http-Cerver.c" "CMakeFiles/server.dir/Http-Cerver.c.o" "gcc" "CMakeFiles/server.dir/Http-Cerver.c.o.d"
-  "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/routing.c" "CMakeFiles/server.dir/routing.c.o" "gcc" "CMakeFiles/server.dir/routing.c.o.d"
+  "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/routing/source/routing.c" "CMakeFiles/server.dir/routing/source/routing.c.o" "gcc" "CMakeFiles/server.dir/routing/source/routing.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

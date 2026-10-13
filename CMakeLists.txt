@@ -18,7 +18,7 @@ target_include_directories(libs PUBLIC
 # Create the executable
 add_executable(server
     Http-Cerver.c
-    routing.c
+    routing/source/routing.c
 )
 
 # for basic dev workflow
