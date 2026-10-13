@@ -6,3 +6,5 @@
 *.so
 *.out
 .vscode/
+
+*/build
