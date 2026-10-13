@@ -36,13 +36,22 @@ typedef struct {
 
 
 
-char* routing(char* route ,enum methods Method);
+char* routing(http_request* request);
 http_request* parse(char* buffer);
 enum methods get_http_method(char* m);
 void Socket_initalize();
 
 int server_socket;
 
+
+char* bad_request_400(){
+	char* respo ="HTTP/1.1 400 BAD\r\n"
+			    "Content-Type: text/plain\r\n"
+			    "Content-Length: 4\r\n"
+				"Connection: close\r\n";
+			return respo;
+
+}
 
 void Socket_initalize(){
 	
@@ -112,7 +121,7 @@ void server_reponse(){
 
 	//sending the response
 
-	char *response = routing(request->route , request->method);
+	char *response = routing(request);
 
 	send(client_socket , response , strlen(response) , 0 );
 
@@ -178,7 +187,13 @@ http_request* parse(char* buffer){
 
 
 }
-char* routing(char* route , enum methods Method ){
+char* routing(http_request* request){
+	if (request == NULL){
+		printf("invalid request\n");
+		return NULL;
+	}
+
+
 	char *response =
 		    "HTTP/1.1 404 NOT FOUND\r\n"
 		    "Content-Type: text/plain\r\n"
@@ -186,9 +201,9 @@ char* routing(char* route , enum methods Method ){
 		    "Connection: close\r\n"
 		    "\r\n"
 		    "Route not found";
-	switch(Method){
+	switch(request->method){
 		case GET:
-			if(strcmp(route , "/get") == 0){
+			if(strcmp(request->route , "/get") == 0){
 
 				char* main_route =
 					    "HTTP/1.1 200 OK\r\n"
@@ -201,7 +216,7 @@ char* routing(char* route , enum methods Method ){
 				}
 			break;
 		case POST:
-			if(strcmp(route , "/post") == 0){
+			if(strcmp(request->route , "/post") == 0){
 				char* main_route =
 					    "HTTP/1.1 200 OK\r\n"
 					    "Content-Type: text/plain\r\n"
@@ -213,11 +228,11 @@ char* routing(char* route , enum methods Method ){
 				}
 			break; 
 	default:
-		return response ;
+		return bad_request_400() ;
 		break;
 	}		
 
-	return response ;
+	return bad_request_400() ;
 }
 
 
