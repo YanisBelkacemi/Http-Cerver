@@ -17,7 +17,7 @@ NEXT STEP :
 #include <unistd.h>
 #include <string.h>
 #include <arpa/inet.h>
-
+#include "classes.h"
 enum methods {
 	POST,
 	GET,
@@ -192,15 +192,6 @@ char* routing(http_request* request){
 		printf("invalid request\n");
 		return NULL;
 	}
-
-
-	char *response =
-		    "HTTP/1.1 404 NOT FOUND\r\n"
-		    "Content-Type: text/plain\r\n"
-		    "Content-Length: 15\r\n"
-		    "Connection: close\r\n"
-		    "\r\n"
-		    "Route not found";
 	switch(request->method){
 		case GET:
 			if(strcmp(request->route , "/get") == 0){
