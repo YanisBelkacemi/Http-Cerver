@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build"
+CMAKE_BINARY_DIR = "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/libs.dir/depend.make
@@ -75,7 +75,7 @@ CMakeFiles/libs.dir/codegen:
 CMakeFiles/libs.dir/libs/classes/source/classes.c.o: CMakeFiles/libs.dir/flags.make
 CMakeFiles/libs.dir/libs/classes/source/classes.c.o: /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/libs/classes/source/classes.c
 CMakeFiles/libs.dir/libs/classes/source/classes.c.o: CMakeFiles/libs.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/libs.dir/libs/classes/source/classes.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/libs.dir/libs/classes/source/classes.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/libs.dir/libs/classes/source/classes.c.o -MF CMakeFiles/libs.dir/libs/classes/source/classes.c.o.d -o CMakeFiles/libs.dir/libs/classes/source/classes.c.o -c "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/libs/classes/source/classes.c"
 
 CMakeFiles/libs.dir/libs/classes/source/classes.c.i: cmake_force
@@ -96,7 +96,7 @@ libs_EXTERNAL_OBJECTS =
 liblibs.a: CMakeFiles/libs.dir/libs/classes/source/classes.c.o
 liblibs.a: CMakeFiles/libs.dir/build.make
 liblibs.a: CMakeFiles/libs.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library liblibs.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library liblibs.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/libs.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/libs.dir/link.txt --verbose=$(VERBOSE)
 
@@ -109,6 +109,6 @@ CMakeFiles/libs.dir/clean:
 .PHONY : CMakeFiles/libs.dir/clean
 
 CMakeFiles/libs.dir/depend:
-	cd "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver" "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver" "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build" "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build" "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build/CMakeFiles/libs.dir/DependInfo.cmake" "--color=$(COLOR)" libs
+	cd "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build" && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver" "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver" "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build" "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build" "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build/CMakeFiles/libs.dir/DependInfo.cmake" "--color=$(COLOR)" libs
 .PHONY : CMakeFiles/libs.dir/depend
 

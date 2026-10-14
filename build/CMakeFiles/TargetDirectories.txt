@@ -1,4 +1,4 @@
-/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build/CMakeFiles/libs.dir
-/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build/CMakeFiles/server.dir
-/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build/CMakeFiles/edit_cache.dir
-/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build/CMakeFiles/libs.dir
+/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build/CMakeFiles/server.dir
+/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build/CMakeFiles/rebuild_cache.dir

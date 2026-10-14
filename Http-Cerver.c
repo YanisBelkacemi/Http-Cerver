@@ -19,8 +19,8 @@ NEXT STEP :
 #include <arpa/inet.h>
 #include "classes.h"
 #include "Http-Cerver.h"
-
-typedef struct http_request http_request;
+#include "routing/headers/routing.h"
+//typedef struct http_request http_request;
 
 
 enum methods {
@@ -31,29 +31,53 @@ enum methods {
 };
 
 
-struct http_request {
-	enum methods method;
-	char* route;
-	char* http_ver;
-};
 
 
 
 
+typedef struct {
 
-char* routing(http_request* request);
-http_request* parse(char* buffer);
-enum methods get_http_method(char* m);
+	size_t capacity;
+	route_struct** routes;
+
+} route_buckets ;
+
+route_buckets* bucket;
+
+
+static enum methods get_http_method(char* m);
+static void store_route(route_struct* request);
+static size_t hash(const char* route , size_t capacity);
+
+static char* routing(http_request* request);
+static http_request* parse(char* buffer);
+static enum methods get_http_method(char* m);
 void Socket_initalize();
 
 int server_socket;
 
 
+void router_init(){
+	bucket = malloc(sizeof(route_buckets));
+	if(bucket == NULL){
+		return ;
+
+	}
+	bucket->capacity = 16; 
+	bucket->routes = calloc(bucket->capacity , sizeof(*bucket->routes));
+	if (bucket->routes == NULL){
+
+		return ;
+
+	}
+}
+
 char* bad_request_400(){
 	char* respo ="HTTP/1.1 400 BAD\r\n"
 			    "Content-Type: text/plain\r\n"
 			    "Content-Length: 4\r\n"
-				"Connection: close\r\n";
+				"Connection: close\r\n"
+				"\r\n";
 			return respo;
 
 }
@@ -116,7 +140,7 @@ void server_reponse(){
 	}
 	buffer[server_receive] = '\0';
 	http_request* request = parse(buffer);
-	printf("method : %d \n route : %s \n Version : %s \n " , request->method ,
+	printf("method : %s \n route : %s \n Version : %s \n " , request->method ,
 		request->route,
 		request->http_ver);
 		
@@ -135,6 +159,7 @@ void server_reponse(){
 	//free memory from parse
 	free(request->route);
 	free(request->http_ver);
+	free(request->method);
 	free(request);
 }
 
@@ -184,35 +209,50 @@ http_request* parse(char* buffer){
 
 
 
- 	request->method = get_http_method(method);
+ 	request->method = method;
 
  	free(new_buffer);
- 	free(method);
  	return request;
 
 
 }
+
+
+// route handling
 char* routing(http_request* request){
 	if (request == NULL){
 		printf("invalid request\n");
 		return NULL;
 	}
-	switch(request->method){
-		case GET:
-			if(strcmp(request->route , "/get") == 0){
+	size_t index = hash(request->route , bucket->capacity);
 
+	if (bucket->routes[index]== NULL){
+
+
+		return bad_request_400();
+	}
+
+
+
+	switch(get_http_method(request->method)){
+		case GET:
+			if(strcmp(request->route , bucket->routes[index]->route) == 0 && strcmp(request->method , bucket->routes[index]->method) == 0){
 				char* main_route =
-					    "HTTP/1.1 200 OK\r\n"
-					    "Content-Type: text/plain\r\n"
-					    "Content-Length: 3\r\n"
-					    "Connection: close\r\n"
-					    "\r\n"
-					    "GET";
+					"HTTP/1.1 200 OK\r\n"
+					"Content-Type: text/plain\r\n"
+					"Content-Length: 3\r\n"
+					"Connection: close\r\n"
+					"\r\n"
+					"GET";
 					return main_route;
 				}
+				else{
+					return bad_request_400();
+					}
 			break;
 		case POST:
-			if(strcmp(request->route , "/post") == 0){
+			printf("The POST has been accessed\n" );
+			if(strcmp(request->route , bucket->routes[index]->route) == 0 && strcmp(request->method , bucket->routes[index]->method) == 0){
 				char* main_route =
 					    "HTTP/1.1 200 OK\r\n"
 					    "Content-Type: text/plain\r\n"
@@ -222,9 +262,13 @@ char* routing(http_request* request){
 					    "POST";
 					return main_route;
 				}
+				else{
+					return bad_request_400();
+					}
+
 			break; 
 	default:
-		return bad_request_400() ;
+		return bad_request_400();
 		break;
 	}		
 
@@ -233,9 +277,9 @@ char* routing(http_request* request){
 
 
 
-
+// turning the Http char method into the enum
 enum methods get_http_method(char* m){
-	enum methods response = ERROR ;
+	enum methods response;
 	if (strcmp(m , "GET")==0){
 		response = GET;
 		return response;
@@ -249,17 +293,41 @@ enum methods get_http_method(char* m){
 		return response;
 
 	}
-	return response;
-	
 }
 
+// hashing function for the hashing map
+size_t hash(const char* route , size_t capacity){
+	size_t h = 0;
+	while(*route){
+		h = h * 31 + (unsigned char)*route;
+		route++;
+	}
 
+	return h % capacity;
+}
+
+//storing routes in a hash map
+void store_route(route_struct* request){
+	size_t index = hash(request->route , bucket->capacity);
+	route_struct* new_route = malloc(sizeof(*new_route));
+	if (new_route == NULL){
+		return;
+	}
+	new_route->route = request->route;
+	new_route->method = request->method;
+
+	bucket->routes[index] = new_route ;
+
+}
 
 
 int main()
 {
+	router_init();
+	store_route(main_page());
+	store_route(postpage());
 	Socket_initalize();
-		
+	
 	while(1){
 		server_reponse();
 	}

@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/build")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Build")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)
