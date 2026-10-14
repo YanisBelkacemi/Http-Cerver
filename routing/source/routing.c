@@ -26,7 +26,7 @@ route_struct* main_page(){
 	route_struct* request =  malloc(sizeof(route_struct));
 	request->route = "/main";
 	request->method = "GET";
-
+	request->file = "../../templates/main.html";
 
 	return request;
 
@@ -37,7 +37,7 @@ route_struct* postpage(){
 	route_struct* request =  malloc(sizeof(route_struct));
 	request->route = "/post";
 	request->method = "POST";
-
+	request->file = "../../templates/main.html";
 
 	return request;
 
@@ -48,7 +48,7 @@ route_struct* error(){
 	route_struct* request =  malloc(sizeof(route_struct));
 	request->route = " ";
 	request->method = "ERROR";
-
+	request->file = "../../templates/main.html";
 
 	return request;
 

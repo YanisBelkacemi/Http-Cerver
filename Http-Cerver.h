@@ -15,7 +15,7 @@ typedef struct  {
 typedef struct {
 	char* route ;
 	char* method;
-
+	char* file;
 } route_struct;
 
 

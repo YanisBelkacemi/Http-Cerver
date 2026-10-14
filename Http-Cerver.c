@@ -77,7 +77,8 @@ char* bad_request_400(){
 			    "Content-Type: text/plain\r\n"
 			    "Content-Length: 4\r\n"
 				"Connection: close\r\n"
-				"\r\n";
+				"\r\n"
+				"400!";
 			return respo;
 
 }
@@ -244,6 +245,13 @@ char* routing(http_request* request){
 					"Connection: close\r\n"
 					"\r\n"
 					"GET";
+
+					FILE *fptr;
+					fptr = fopen(bucket->routes[index]->file , "r");
+					if (fptr == NULL){
+						printf("file cant be opened");
+
+					}
 					return main_route;
 				}
 				else{
@@ -315,7 +323,7 @@ void store_route(route_struct* request){
 	}
 	new_route->route = request->route;
 	new_route->method = request->method;
-
+	new_route->file = request->file;
 	bucket->routes[index] = new_route ;
 
 }
