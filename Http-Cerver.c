@@ -18,6 +18,11 @@ NEXT STEP :
 #include <string.h>
 #include <arpa/inet.h>
 #include "classes.h"
+#include "Http-Cerver.h"
+
+typedef struct http_request http_request;
+
+
 enum methods {
 	POST,
 	GET,
@@ -26,11 +31,11 @@ enum methods {
 };
 
 
-typedef struct {
+struct http_request {
 	enum methods method;
 	char* route;
 	char* http_ver;
-} http_request ;
+};
 
 
 

@@ -13,6 +13,7 @@ add_library(libs STATIC
 # Specify where the library headers are located
 target_include_directories(libs PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/libs/classes/headers
+
 )
 
 # Create the executable
@@ -35,5 +36,3 @@ target_compile_options(libs PRIVATE
 )
 
 target_link_libraries(server PUBLIC libs)
-# Link the library to the executable
-target_link_libraries(server PRIVATE libs)
