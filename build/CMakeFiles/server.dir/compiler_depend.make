@@ -3,8 +3,6 @@
 
 CMakeFiles/server.dir/Http-Cerver.c.o: /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/Http-Cerver.c \
   /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/Http-Cerver.h \
-  /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/libs/classes/headers/classes.h \
-  /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/routing/headers/routing.h \
   /usr/include/alloca.h \
   /usr/include/arpa/inet.h \
   /usr/include/asm-generic/bitsperlong.h \
@@ -91,6 +89,13 @@ CMakeFiles/server.dir/Http-Cerver.c.o: /mnt/c/Users/ASUS/Documents/c\ resume\ pr
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
 
+CMakeFiles/server.dir/main.c.o: /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/main.c \
+  /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/Http-Cerver.h \
+  /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/libs/classes/headers/classes.h \
+  /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/routing/headers/routing.h \
+  /usr/include/stdc-predef.h \
+  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+
 CMakeFiles/server.dir/routing/source/routing.c.o: /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/routing/source/routing.c \
   /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/libs/classes/headers/classes.h \
   /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/Http-Cerver.h \
@@ -141,6 +146,8 @@ CMakeFiles/server.dir/routing/source/routing.c.o: /mnt/c/Users/ASUS/Documents/c\
   /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
 
 
+/mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/main.c:
+
 /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/routing/source/routing.c:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
@@ -151,9 +158,17 @@ CMakeFiles/server.dir/routing/source/routing.c.o: /mnt/c/Users/ASUS/Documents/c\
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
-/usr/include/x86_64-linux-gnu/bits/waitflags.h:
+/mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/libs/classes/headers/classes.h:
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h:
+
+/usr/include/x86_64-linux-gnu/bits/in.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+
+/usr/include/asm-generic/bitsperlong.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
@@ -177,37 +192,13 @@ CMakeFiles/server.dir/routing/source/routing.c.o: /mnt/c/Users/ASUS/Documents/c\
 
 /usr/include/string.h:
 
-/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
-
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
-
 /usr/include/x86_64-linux-gnu/asm/posix_types.h:
 
 /usr/include/stdlib.h:
 
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
-/usr/include/stdio.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/x86_64-linux-gnu/bits/wordsize.h:
-
-/mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/libs/classes/headers/classes.h:
-
-/usr/include/asm-generic/bitsperlong.h:
-
-/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
-
-/usr/include/asm-generic/socket.h:
-
-/usr/include/arpa/inet.h:
+/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 
@@ -221,21 +212,29 @@ CMakeFiles/server.dir/routing/source/routing.c.o: /mnt/c/Users/ASUS/Documents/c\
 
 /usr/include/x86_64-linux-gnu/bits/socket.h:
 
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
+
 /usr/include/endian.h:
 
 /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/Http-Cerver.c:
 
-/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
-/usr/include/asm-generic/posix_types.h:
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+/usr/include/stdc-predef.h:
+
+/usr/include/arpa/inet.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/stdio.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
 /usr/include/asm-generic/sockios.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/socket_type.h:
 
 /usr/include/x86_64-linux-gnu/bits/confname.h:
 
@@ -252,8 +251,6 @@ CMakeFiles/server.dir/routing/source/routing.c.o: /mnt/c/Users/ASUS/Documents/c\
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/linux/stddef.h:
-
-/usr/include/x86_64-linux-gnu/bits/in.h:
 
 /usr/include/alloca.h:
 
@@ -285,9 +282,9 @@ CMakeFiles/server.dir/routing/source/routing.c.o: /mnt/c/Users/ASUS/Documents/c\
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
-/usr/include/x86_64-linux-gnu/asm/socket.h:
-
 /usr/include/x86_64-linux-gnu/bits/environments.h:
+
+/usr/include/x86_64-linux-gnu/asm/socket.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
@@ -317,6 +314,16 @@ CMakeFiles/server.dir/routing/source/routing.c.o: /mnt/c/Users/ASUS/Documents/c\
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
 
+/usr/include/x86_64-linux-gnu/bits/socket_type.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
+
 /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/routing/headers/routing.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
+
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:

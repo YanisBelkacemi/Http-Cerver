@@ -17,9 +17,7 @@ NEXT STEP :
 #include <unistd.h>
 #include <string.h>
 #include <arpa/inet.h>
-#include "classes.h"
 #include "Http-Cerver.h"
-#include "routing/headers/routing.h"
 //typedef struct http_request http_request;
 
 
@@ -43,15 +41,17 @@ typedef struct {
 route_buckets* bucket;
 
 
-static enum methods get_http_method(char* m);
-static void store_route(route_struct* request);
-static size_t hash(const char* route , size_t capacity);
+ enum methods get_http_method(char* m);
+ size_t hash(const char* route , size_t capacity);
+ char* routing(http_request* request);
+ http_request* parse(char* buffer);
+ enum methods get_http_method(char* m);
+ char* load_html(const char* FileName);
 
-static char* routing(http_request* request);
-static http_request* parse(char* buffer);
-static enum methods get_http_method(char* m);
-static char* load_html(const char* FileName);
 void Socket_initalize();
+void router_init();
+void store_route(route_struct* request);
+void server_reponse();
 
 int server_socket;
 
@@ -383,17 +383,4 @@ char* load_html(const char* FileName){
 	return buffer;
 }
 
-int main()
-{
-	router_init();
-	store_route(main_page());
-	store_route(postpage());
-	store_route(main_pagetwo());
-	Socket_initalize();
-	
-	while(1){
-		server_reponse();
-	}
-	close(server_socket);
-	return 0;
-}
+

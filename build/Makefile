@@ -190,6 +190,30 @@ libs/classes/source/classes.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/libs.dir/build.make CMakeFiles/libs.dir/libs/classes/source/classes.c.s
 .PHONY : libs/classes/source/classes.c.s
 
+main.o: main.c.o
+.PHONY : main.o
+
+# target to build an object file
+main.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.c.o
+.PHONY : main.c.o
+
+main.i: main.c.i
+.PHONY : main.i
+
+# target to preprocess a source file
+main.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.c.i
+.PHONY : main.c.i
+
+main.s: main.c.s
+.PHONY : main.s
+
+# target to generate assembly for a file
+main.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/main.c.s
+.PHONY : main.c.s
+
 routing/source/routing.o: routing/source/routing.c.o
 .PHONY : routing/source/routing.o
 
@@ -230,6 +254,9 @@ help:
 	@echo "... libs/classes/source/classes.o"
 	@echo "... libs/classes/source/classes.i"
 	@echo "... libs/classes/source/classes.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... routing/source/routing.o"
 	@echo "... routing/source/routing.i"
 	@echo "... routing/source/routing.s"

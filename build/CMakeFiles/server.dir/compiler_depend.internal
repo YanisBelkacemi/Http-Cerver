@@ -4,8 +4,6 @@
 CMakeFiles/server.dir/Http-Cerver.c.o
  /mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Http-Cerver.c
  /mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Http-Cerver.h
- /mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/libs/classes/headers/classes.h
- /mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/routing/headers/routing.h
  /usr/include/alloca.h
  /usr/include/arpa/inet.h
  /usr/include/asm-generic/bitsperlong.h
@@ -90,6 +88,14 @@ CMakeFiles/server.dir/Http-Cerver.c.o
  /usr/include/x86_64-linux-gnu/sys/socket.h
  /usr/include/x86_64-linux-gnu/sys/types.h
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
+
+CMakeFiles/server.dir/main.c.o
+ /mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/main.c
+ /mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/Http-Cerver.h
+ /mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/libs/classes/headers/classes.h
+ /mnt/c/Users/ASUS/Documents/c resume projects/Http-Cerver/routing/headers/routing.h
+ /usr/include/stdc-predef.h
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
 
 CMakeFiles/server.dir/routing/source/routing.c.o

@@ -18,5 +18,12 @@ typedef struct {
 	char* file;
 } route_struct;
 
+extern int server_socket;
+
+void Socket_initalize();
+void router_init();
+void store_route(route_struct* request);
+void server_reponse();
+
 
 #endif

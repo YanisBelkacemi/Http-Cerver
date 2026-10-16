@@ -76,6 +76,4 @@ CMakeFiles/server.dir/Http-Cerver.c.o: \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h /usr/include/arpa/inet.h \
- /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/libs/classes/headers/classes.h \
- /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/Http-Cerver.h \
- /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/routing/headers/routing.h
+ /mnt/c/Users/ASUS/Documents/c\ resume\ projects/Http-Cerver/Http-Cerver.h
