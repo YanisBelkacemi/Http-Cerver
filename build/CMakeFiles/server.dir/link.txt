@@ -1,1 +1,0 @@
-/usr/bin/cc "CMakeFiles/server.dir/Http-Cerver.c.o" CMakeFiles/server.dir/routing/source/routing.c.o CMakeFiles/server.dir/main.c.o -o server  liblibs.a

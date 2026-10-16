@@ -1,10 +1,24 @@
-*.exe
+# Build files
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Compiled binaries and object files
 *.o
+*.obj
+*.exe
 *.out
 *.a
-*.dll
 *.so
-*.out
+*.dll
+
+# IDE files
 .vscode/
-main2.html
-*/build
+.idea/
+
+# Debug files
+*.pdb
+*.ilk
