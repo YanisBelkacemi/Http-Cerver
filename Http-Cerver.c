@@ -33,8 +33,6 @@ enum methods {
 
 
 
-
-
 typedef struct {
 
 	size_t capacity;
@@ -52,6 +50,7 @@ static size_t hash(const char* route , size_t capacity);
 static char* routing(http_request* request);
 static http_request* parse(char* buffer);
 static enum methods get_http_method(char* m);
+static char* load_html(const char* FileName);
 void Socket_initalize();
 
 int server_socket;
@@ -141,6 +140,11 @@ void server_reponse(){
 	}
 	buffer[server_receive] = '\0';
 	http_request* request = parse(buffer);
+
+	if (request == NULL){
+		return ;
+
+	}
 	printf("method : %s \n route : %s \n Version : %s \n " , request->method ,
 		request->route,
 		request->http_ver);
@@ -152,6 +156,15 @@ void server_reponse(){
 	//sending the response
 
 	char *response = routing(request);
+
+
+
+	if (response == NULL) {
+		return ;
+	}
+
+
+
 
 	send(client_socket , response , strlen(response) , 0 );
 
@@ -238,21 +251,35 @@ char* routing(http_request* request){
 	switch(get_http_method(request->method)){
 		case GET:
 			if(strcmp(request->route , bucket->routes[index]->route) == 0 && strcmp(request->method , bucket->routes[index]->method) == 0){
-				char* main_route =
+				char* html_response =load_html(bucket->routes[index]->file);
+				char main_route[250];
+				int header_length = snprintf(
+					main_route,
+					sizeof(main_route),
 					"HTTP/1.1 200 OK\r\n"
-					"Content-Type: text/plain\r\n"
-					"Content-Length: 3\r\n"
+					"Content-Type: text/html\r\n"
+					"Content-Length: %zu\r\n"
 					"Connection: close\r\n"
-					"\r\n"
-					"GET";
-
-					FILE *fptr;
-					fptr = fopen(bucket->routes[index]->file , "r");
-					if (fptr == NULL){
-						printf("file cant be opened");
-
+					"\r\n",
+					strlen(html_response)
+					);
+				if (header_length < 0 || (size_t)header_length >= sizeof(main_route)) {
+					    free(html_response);
+					    return NULL;
 					}
-					return main_route;
+
+				char* response = malloc((size_t)header_length + strlen(html_response));
+
+				if (response == NULL) {
+				    free(html_response);
+				    return NULL;
+				}
+
+				memcpy(response, main_route, (size_t)header_length);
+				memcpy(response + header_length, html_response, strlen(html_response));
+
+				free(html_response);
+				return response;
 				}
 				else{
 					return bad_request_400();
@@ -329,11 +356,39 @@ void store_route(route_struct* request){
 }
 
 
+char* load_html(const char* FileName){
+	printf("File is : %s \n" , FileName);
+	FILE *fptr;
+	fptr = fopen(FileName , "rb");
+	if (fptr == NULL){
+		    perror("fopen");
+    	return NULL;
+
+	}
+
+	fseek(fptr , 0 , SEEK_END);
+	long size = ftell(fptr);
+	fseek(fptr , 0 , SEEK_SET);
+
+	char* buffer = malloc( size + 1);
+
+	if (buffer == NULL){
+		printf("unable to read the file ");
+		return NULL; 
+	}
+
+	size_t elements_f = fread(buffer , 1 , size , fptr );
+	buffer[elements_f] = '\0';
+	fclose(fptr);
+	return buffer;
+}
+
 int main()
 {
 	router_init();
 	store_route(main_page());
 	store_route(postpage());
+	store_route(main_pagetwo());
 	Socket_initalize();
 	
 	while(1){
