@@ -17,7 +17,6 @@
 
 route_struct* main_page();
 route_struct* postpage();
-route_struct* main_pagetwo();
 route_struct* error();
 
 
@@ -33,16 +32,6 @@ route_struct* main_page(){
 
 }
 
-route_struct* main_pagetwo(){
-
-	route_struct* request =  malloc(sizeof(route_struct));
-	request->route = "/main2";
-	request->method = "GET";
-	request->file = "templates/main2.html";
-
-	return request;
-
-}
 
 route_struct* postpage(){
 

@@ -1,19 +1,11 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Windows XP Desktop</title>
-
 <style>
 * { box-sizing: border-box; }
-
-:root {
-    --xp-blue: #0866d9;
-    --xp-dark: #0054c7;
-    --xp-green: #3b9b22;
-}
 
 body {
     margin: 0;
@@ -22,22 +14,14 @@ body {
     font-family: Tahoma, Verdana, sans-serif;
     font-size: 12px;
     user-select: none;
-    background: linear-gradient(180deg,
-        #0866bc 0%, #42a4e9 37%,
-        #a9d6ee 53%, #8bbd54 64%,
-        #498e26 80%, #23621d 100%);
+    background: #1475d0;
 }
-
-/* Desktop wallpaper */
 
 .wallpaper {
     position: absolute;
     inset: 0;
     overflow: hidden;
-    background: linear-gradient(180deg,
-        #1475d0 0%, #58b7f0 42%,
-        #b2e2f7 57%, #78b64b 70%,
-        #347a22 100%);
+    background: linear-gradient(180deg, #1475d0 0%, #58b7f0 42%, #b2e2f7 57%, #78b64b 70%, #347a22 100%);
 }
 
 .sun-glow {
@@ -47,8 +31,7 @@ body {
     width: 220px;
     height: 220px;
     border-radius: 50%;
-    background: radial-gradient(circle,
-        rgba(255,255,220,.8), rgba(255,255,220,0) 70%);
+    background: radial-gradient(circle, rgba(255,255,220,.8), rgba(255,255,220,0) 70%);
 }
 
 .hill {
@@ -64,7 +47,6 @@ body {
 
 .hill.second {
     height: 35%;
-    bottom: 22px;
     left: 20%;
     transform: rotate(9deg);
     background: linear-gradient(175deg, #b4d963, #55932c 75%);
@@ -76,12 +58,11 @@ body {
     padding: 12px;
 }
 
-/* Desktop icons */
-
 .desktop-icon {
     width: 82px;
     min-height: 82px;
     padding: 7px 3px;
+    margin-bottom: 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,6 +78,7 @@ body {
 .desktop-icon.selected {
     background: rgba(45, 116, 220, .45);
     border: 1px dotted #fff;
+    outline: none;
 }
 
 .icon-art {
@@ -105,11 +87,7 @@ body {
     filter: drop-shadow(1px 2px 1px #555);
 }
 
-.desktop-icon span:last-child {
-    line-height: 1.4;
-}
-
-/* Window chrome */
+.desktop-icon span:last-child { line-height: 1.4; }
 
 .window {
     position: absolute;
@@ -143,11 +121,10 @@ body {
     background: linear-gradient(#3894ff, #0861d5 48%, #0052be);
     text-shadow: 1px 1px #124b8c;
     cursor: move;
+    touch-action: none;
 }
 
-.window.inactive .title-bar {
-    background: linear-gradient(#8ba6c7, #5e7b9e);
-}
+.window.inactive .title-bar { background: linear-gradient(#8ba6c7, #5e7b9e); }
 
 .window-title {
     overflow: hidden;
@@ -155,10 +132,7 @@ body {
     text-overflow: ellipsis;
 }
 
-.window-buttons {
-    display: flex;
-    gap: 3px;
-}
+.window-buttons { display: flex; gap: 3px; }
 
 .window-buttons button {
     width: 22px;
@@ -171,9 +145,7 @@ body {
     cursor: pointer;
 }
 
-.window-buttons .close {
-    background: linear-gradient(#ffb4a6, #e74c38 55%, #b51b10);
-}
+.window-buttons .close { background: linear-gradient(#ffb4a6, #e74c38 55%, #b51b10); }
 
 .menu-bar {
     display: flex;
@@ -192,27 +164,19 @@ body {
     user-select: text;
 }
 
+.window-body.flush { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+
 .status-bar {
     padding: 5px 8px;
     border-top: 1px solid #d2d0c4;
     background: #f1efe5;
     color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Explorer */
-
-.address-bar {
-    padding: 7px;
-    margin-bottom: 12px;
-    background: #f4f3eb;
-    border: 1px solid #d0cec2;
-}
-
-.file-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-}
+.file-list { display: flex; flex-wrap: wrap; gap: 18px; }
 
 .file-item {
     width: 90px;
@@ -222,14 +186,15 @@ body {
     border: 1px solid transparent;
 }
 
-.file-item:hover {
-    background: #e6f1ff;
-    border-color: #8cb9ee;
-}
-
+.file-item:hover { background: #e6f1ff; border-color: #8cb9ee; }
 .file-item .icon-art { display: block; margin-bottom: 6px; }
 
-/* Notepad */
+.address-bar {
+    padding: 7px;
+    margin-bottom: 12px;
+    background: #f4f3eb;
+    border: 1px solid #d0cec2;
+}
 
 .notepad {
     width: 100%;
@@ -240,8 +205,6 @@ body {
     font: 13px Consolas, monospace;
     white-space: pre-wrap;
 }
-
-/* Terminal */
 
 .terminal {
     height: 100%;
@@ -254,12 +217,7 @@ body {
 }
 
 .terminal-output { white-space: pre-wrap; overflow-wrap: anywhere; }
-
-.terminal-line {
-    display: flex;
-    gap: 7px;
-    margin-top: 5px;
-}
+.terminal-line { display: flex; gap: 7px; margin-top: 5px; }
 
 .terminal input {
     flex: 1;
@@ -271,7 +229,116 @@ body {
     font: inherit;
 }
 
-/* Start menu and taskbar */
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 8px;
+    background: #ece9d8;
+    border-bottom: 1px solid #c6c4b9;
+}
+
+.toolbar button {
+    height: 26px;
+    padding: 0 10px;
+    color: #000;
+    font: inherit;
+    background: linear-gradient(#fff, #e3e1d3);
+    border: 1px solid #9b9884;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.toolbar button:disabled { color: #999; cursor: default; }
+.toolbar button:not(:disabled):hover { border-color: #3d86d8; }
+
+.toolbar .path {
+    flex: 1;
+    min-width: 0;
+    height: 26px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background: white;
+    border: 1px solid #7f9db9;
+}
+
+.toolbar a {
+    color: #0b3fa8;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.toolbar a:hover { text-decoration: underline; }
+
+.repo { flex: 1; min-height: 0; display: flex; }
+
+.tree {
+    width: 210px;
+    flex: 0 0 210px;
+    overflow: auto;
+    padding: 6px 0;
+    background: #f6f5ee;
+    border-right: 1px solid #c6c4b9;
+}
+
+.tree ul { list-style: none; margin: 0; padding: 0; }
+.tree ul ul { display: none; }
+.tree li.open > ul { display: block; }
+
+.tree-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 6px 3px calc(6px + var(--depth) * 14px);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.tree-row:hover { background: #e6f1ff; }
+.tree-row.sel { background: #316ac5; color: white; }
+.tree-arrow { width: 10px; text-align: center; font-size: 9px; }
+
+.pane { flex: 1; min-width: 0; overflow: auto; background: white; }
+
+.dir-table { width: 100%; border-collapse: collapse; }
+
+.dir-table th {
+    position: sticky;
+    top: 0;
+    padding: 5px 10px;
+    text-align: left;
+    font-weight: normal;
+    background: linear-gradient(#fff, #ebe9dc);
+    border-bottom: 1px solid #c6c4b9;
+    border-right: 1px solid #d8d6c9;
+}
+
+.dir-table td { padding: 5px 10px; white-space: nowrap; }
+.dir-table tr.entry { cursor: pointer; }
+.dir-table tr.entry:hover td { background: #e6f1ff; }
+.dir-table td.size { text-align: right; color: #555; }
+
+.viewer { display: flex; min-width: max-content; font: 13px/1.5 Consolas, "Courier New", monospace; }
+
+.gutter {
+    margin: 0;
+    padding: 8px 10px;
+    position: sticky;
+    left: 0;
+    text-align: right;
+    color: #8a8a80;
+    background: #f1efe5;
+    border-right: 1px solid #d2d0c4;
+}
+
+.code { margin: 0; padding: 8px 14px; tab-size: 4; }
+
+.notice { padding: 24px; color: #444; line-height: 1.6; }
+.notice b { color: #a1241b; }
 
 .taskbar {
     position: absolute;
@@ -283,7 +350,6 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
-    padding-right: 0;
     background: linear-gradient(#3a91f2, #0862c9 50%, #0646a7);
     border-top: 1px solid #76b9ff;
     box-shadow: 0 -1px 5px #0005;
@@ -363,9 +429,7 @@ body {
     border-bottom: 3px solid #e5a927;
 }
 
-.start-items {
-    padding: 9px;
-}
+.start-items { padding: 9px; }
 
 .start-item {
     display: flex;
@@ -377,7 +441,6 @@ body {
 }
 
 .start-item:hover { background: #dbeafe; }
-
 .start-item .icon-art { font-size: 25px; }
 
 .start-footer {
@@ -388,14 +451,12 @@ body {
     border-top: 1px solid #ccc;
 }
 
-.start-footer button {
-    padding: 7px 10px;
-    cursor: pointer;
-}
+.start-footer button { padding: 7px 10px; cursor: pointer; }
 
-@media (max-width: 520px) {
+@media (max-width: 640px) {
     .window { left: 8px !important; top: 35px; }
     .task-button { min-width: 45px; padding: 0 5px; }
+    .tree { width: 130px; flex-basis: 130px; }
 }
 </style>
 </head>
@@ -413,24 +474,24 @@ body {
         <span class="icon-art">🖥️</span>
         <span>My Computer</span>
     </div>
-
+    <div class="desktop-icon" data-open="repo" tabindex="0">
+        <span class="icon-art">📂</span>
+        <span>Http-Cerver</span>
+    </div>
     <div class="desktop-icon" data-open="notepad" tabindex="0">
         <span class="icon-art">📝</span>
         <span>Notepad</span>
     </div>
-
     <div class="desktop-icon" data-open="terminal" tabindex="0">
         <span class="icon-art">⌨️</span>
         <span>Command Prompt</span>
     </div>
-
     <div class="desktop-icon" data-open="about" tabindex="0">
         <span class="icon-art">🌐</span>
         <span>About This PC</span>
     </div>
 </div>
 
-<!-- Explorer window -->
 <section class="window hidden" id="explorer" style="top:65px;left:120px">
     <header class="title-bar">
         <span class="window-title">🖥️ My Computer</span>
@@ -445,16 +506,41 @@ body {
         <div class="address-bar">📁 Address: My Computer</div>
         <h3>Files stored on this computer</h3>
         <div class="file-list">
+            <div class="file-item" data-open="repo"><span class="icon-art">📂</span>Http-Cerver</div>
             <div class="file-item" data-open="about"><span class="icon-art">💽</span>Local Disk (C:)</div>
             <div class="file-item" data-open="notepad"><span class="icon-art">📄</span>Readme.txt</div>
             <div class="file-item" data-open="terminal"><span class="icon-art">⌨️</span>Command Prompt</div>
         </div>
         <p>This is a simulated desktop. These icons don't access your actual filesystem.</p>
     </div>
-    <footer class="status-bar">3 objects</footer>
+    <footer class="status-bar">4 objects</footer>
 </section>
 
-<!-- Notepad window -->
+<section class="window hidden" id="repo" style="top:40px;left:90px;width:min(820px,calc(100vw - 24px));height:min(520px,calc(100vh - 90px))">
+    <header class="title-bar">
+        <span class="window-title">📂 Http-Cerver</span>
+        <div class="window-buttons">
+            <button data-action="minimize" aria-label="Minimize">_</button>
+            <button data-action="maximize" aria-label="Maximize">□</button>
+            <button class="close" data-action="close" aria-label="Close">×</button>
+        </div>
+    </header>
+    <nav class="menu-bar"><span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Help</span></nav>
+    <div class="toolbar">
+        <button id="repo-back" disabled>◀ Back</button>
+        <button id="repo-up" disabled>▲ Up</button>
+        <div class="path" id="repo-path">Http-Cerver</div>
+        <a href="https://github.com/YanisBelkacemi/Http-Cerver" target="_blank" rel="noopener">Open on GitHub</a>
+    </div>
+    <div class="window-body flush">
+        <div class="repo">
+            <div class="tree" id="repo-tree"></div>
+            <div class="pane" id="repo-pane"></div>
+        </div>
+    </div>
+    <footer class="status-bar" id="repo-status">Ready</footer>
+</section>
+
 <section class="window hidden" id="notepad" style="top:90px;left:210px">
     <header class="title-bar">
         <span class="window-title">📝 Untitled - Notepad</span>
@@ -470,6 +556,8 @@ body {
 
 This desktop is served by a custom HTTP server written in C.
 
+Open "Http-Cerver" to browse its source code.
+
 Try opening Command Prompt and typing "help".
 
 You can edit this text, too. Have fun!
@@ -479,7 +567,6 @@ You can edit this text, too. Have fun!
     <footer class="status-bar">Ready</footer>
 </section>
 
-<!-- Terminal window -->
 <section class="window hidden" id="terminal" style="top:115px;left:260px;width:min(600px,calc(100vw - 24px));height:min(350px,calc(100vh - 100px))">
     <header class="title-bar">
         <span class="window-title">⌨️ C:\WINDOWS\system32\cmd.exe</span>
@@ -497,13 +584,12 @@ You can edit this text, too. Have fun!
 Type "help" to see available commands.</div>
             <form class="terminal-line" id="terminal-form">
                 <label for="terminal-input">C:\&gt;</label>
-                <input id="terminal-input" autocomplete="off" autofocus>
+                <input id="terminal-input" autocomplete="off">
             </form>
         </div>
     </div>
 </section>
 
-<!-- About window -->
 <section class="window hidden" id="about" style="top:85px;left:175px;width:min(410px,calc(100vw - 24px));height:310px">
     <header class="title-bar">
         <span class="window-title">🌐 About This PC</span>
@@ -525,11 +611,11 @@ Type "help" to see available commands.</div>
     </div>
 </section>
 
-<!-- Start menu -->
 <div class="start-menu hidden" id="start-menu">
     <div class="user-header">👤 Yanis</div>
     <div class="start-items">
         <div class="start-item" data-open="explorer"><span class="icon-art">🖥️</span>My Computer</div>
+        <div class="start-item" data-open="repo"><span class="icon-art">📂</span>Http-Cerver</div>
         <div class="start-item" data-open="notepad"><span class="icon-art">📝</span>Notepad</div>
         <div class="start-item" data-open="terminal"><span class="icon-art">⌨️</span>Command Prompt</div>
         <div class="start-item" data-open="about"><span class="icon-art">🌐</span>About This PC</div>
@@ -540,7 +626,6 @@ Type "help" to see available commands.</div>
     </div>
 </div>
 
-<!-- Taskbar -->
 <footer class="taskbar">
     <button class="start-button" id="start-button">✿ start</button>
     <div id="task-buttons" style="display:flex;gap:4px;overflow:hidden"></div>
@@ -559,7 +644,7 @@ Type "help" to see available commands.</div>
 
     let topZ = 100;
     let activeWindow = null;
-    let highestOpened = null;
+    let repoStarted = false;
 
     function setActive(win) {
         if (!win || win.classList.contains("hidden")) return;
@@ -575,9 +660,7 @@ Type "help" to see available commands.</div>
 
     function focusWindow(win) {
         setActive(win);
-        if (win.id === "terminal") {
-            document.getElementById("terminal-input").focus();
-        }
+        if (win.id === "terminal") document.getElementById("terminal-input").focus();
     }
 
     function openWindow(id) {
@@ -585,14 +668,14 @@ Type "help" to see available commands.</div>
         if (!win) return;
 
         win.classList.remove("hidden");
-        const task = taskButtons.querySelector(`[data-window="${id}"]`);
+        let task = taskButtons.querySelector(`[data-window="${id}"]`);
 
         if (!task) {
-            const btn = document.createElement("button");
-            btn.className = "task-button";
-            btn.dataset.window = id;
-            btn.textContent = win.querySelector(".window-title").textContent;
-            btn.addEventListener("click", () => {
+            task = document.createElement("button");
+            task.className = "task-button";
+            task.dataset.window = id;
+            task.textContent = win.querySelector(".window-title").textContent;
+            task.addEventListener("click", () => {
                 if (win.classList.contains("hidden")) {
                     win.classList.remove("hidden");
                     focusWindow(win);
@@ -603,10 +686,14 @@ Type "help" to see available commands.</div>
                     focusWindow(win);
                 }
             });
-            taskButtons.appendChild(btn);
+            taskButtons.appendChild(task);
         }
 
-        highestOpened = win;
+        if (id === "repo" && !repoStarted) {
+            repoStarted = true;
+            repo.start();
+        }
+
         focusWindow(win);
         startMenu.classList.add("hidden");
     }
@@ -652,7 +739,6 @@ Type "help" to see available commands.</div>
         focusWindow(win);
     }
 
-    // Desktop icons: double-click to open.
     desktopIcons.forEach(icon => {
         icon.addEventListener("click", () => {
             desktopIcons.forEach(i => i.classList.remove("selected"));
@@ -664,10 +750,9 @@ Type "help" to see available commands.</div>
         });
     });
 
-    // Start menu and all open shortcuts.
     document.addEventListener("click", e => {
         const opener = e.target.closest("[data-open]");
-        if (opener) openWindow(opener.dataset.open);
+        if (opener && !opener.classList.contains("desktop-icon")) openWindow(opener.dataset.open);
     });
 
     startButton.addEventListener("click", e => {
@@ -695,7 +780,6 @@ Type "help" to see available commands.</div>
         }
     });
 
-    // Window controls.
     windows.forEach(win => {
         win.addEventListener("pointerdown", () => setActive(win));
 
@@ -712,8 +796,11 @@ Type "help" to see available commands.</div>
             });
         });
 
-        // Drag windows by their title bar.
         const bar = win.querySelector(".title-bar");
+        bar.addEventListener("dblclick", e => {
+            if (!e.target.closest("button")) toggleMaximize(win);
+        });
+
         bar.addEventListener("pointerdown", e => {
             if (e.target.closest("button") || win.dataset.maximized === "true") return;
 
@@ -727,14 +814,8 @@ Type "help" to see available commands.</div>
             bar.setPointerCapture(e.pointerId);
 
             function move(ev) {
-                const left = Math.max(0, Math.min(
-                    window.innerWidth - 80,
-                    originX + ev.clientX - startX
-                ));
-                const top = Math.max(0, Math.min(
-                    window.innerHeight - 80,
-                    originY + ev.clientY - startY
-                ));
+                const left = Math.max(0, Math.min(window.innerWidth - 80, originX + ev.clientX - startX));
+                const top = Math.max(0, Math.min(window.innerHeight - 80, originY + ev.clientY - startY));
                 win.style.left = left + "px";
                 win.style.top = top + "px";
             }
@@ -751,31 +832,321 @@ Type "help" to see available commands.</div>
         });
     });
 
-    // Clock.
     function updateClock() {
         document.getElementById("clock").textContent =
-            new Date().toLocaleTimeString([], {
-                hour: "numeric",
-                minute: "2-digit"
-            });
+            new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
     }
     updateClock();
     setInterval(updateClock, 1000);
 
-    // Simulated terminal. These commands run in the browser, not in your OS.
+    const repo = (() => {
+        const OWNER = "YanisBelkacemi";
+        const NAME = "Http-Cerver";
+        const API = `https://api.github.com/repos/${OWNER}/${NAME}/contents`;
+        const MAX_VIEW_BYTES = 400 * 1024;
+
+        const treeEl = document.getElementById("repo-tree");
+        const paneEl = document.getElementById("repo-pane");
+        const pathEl = document.getElementById("repo-path");
+        const statusEl = document.getElementById("repo-status");
+        const backBtn = document.getElementById("repo-back");
+        const upBtn = document.getElementById("repo-up");
+
+        const cache = new Map();
+        const history = [];
+        let current = "";
+        let token = 0;
+
+        const fileIcons = {
+            c: "📘", h: "📗", html: "🌐", css: "🎨", js: "📜", json: "🧾",
+            md: "📝", txt: "📄", sh: "⚙️", py: "🐍", png: "🖼️", jpg: "🖼️",
+            gif: "🖼️", ico: "🖼️", svg: "🖼️"
+        };
+
+        function iconFor(entry) {
+            if (entry.type === "dir") return "📁";
+            const lower = entry.name.toLowerCase();
+            if (lower === "makefile" || lower === "cmakelists.txt") return "⚙️";
+            const ext = lower.includes(".") ? lower.split(".").pop() : "";
+            return fileIcons[ext] || "📄";
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + " B";
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+            return (bytes / 1024 / 1024).toFixed(1) + " MB";
+        }
+
+        function winPath(path) {
+            return NAME + (path ? "\\" + path.split("/").join("\\") : "");
+        }
+
+        function parentOf(path) {
+            const i = path.lastIndexOf("/");
+            return i === -1 ? "" : path.slice(0, i);
+        }
+
+        async function request(url, as) {
+            const key = as + url;
+            if (cache.has(key)) return cache.get(key);
+
+            const res = await fetch(url, as === "json" ? { headers: { Accept: "application/vnd.github+json" } } : undefined);
+            if (!res.ok) {
+                const err = new Error("HTTP " + res.status);
+                err.status = res.status;
+                err.rateLimited = res.status === 429 || (res.status === 403 && res.headers.get("x-ratelimit-remaining") === "0");
+                throw err;
+            }
+
+            const data = as === "json" ? await res.json() : await res.text();
+            cache.set(key, data);
+            return data;
+        }
+
+        function contents(path) {
+            const encoded = path.split("/").filter(Boolean).map(encodeURIComponent).join("/");
+            return request(encoded ? `${API}/${encoded}` : API, "json");
+        }
+
+        function sortEntries(list) {
+            return [...list].sort((a, b) => {
+                if (a.type !== b.type) return a.type === "dir" ? -1 : 1;
+                return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+            });
+        }
+
+        function showNotice(html) {
+            paneEl.innerHTML = "";
+            const box = document.createElement("div");
+            box.className = "notice";
+            box.innerHTML = html;
+            paneEl.appendChild(box);
+        }
+
+        function describeError(err) {
+            if (err.rateLimited) {
+                return "<b>GitHub API rate limit reached.</b><br>Anonymous requests are limited per hour. Try again later.";
+            }
+            if (err.status === 404) return "<b>Not found.</b><br>This path doesn't exist in the repository.";
+            return "<b>Couldn't load this location.</b><br>Check your internet connection and try again.";
+        }
+
+        function updateToolbar() {
+            pathEl.textContent = winPath(current);
+            backBtn.disabled = history.length === 0;
+            upBtn.disabled = current === "";
+        }
+
+        function markSelected(path) {
+            treeEl.querySelectorAll(".tree-row").forEach(row => {
+                row.classList.toggle("sel", row.dataset.path === path);
+            });
+        }
+
+        function renderDir(path, entries) {
+            const sorted = sortEntries(entries);
+            paneEl.innerHTML = "";
+
+            const table = document.createElement("table");
+            table.className = "dir-table";
+            table.innerHTML = "<thead><tr><th>Name</th><th>Type</th><th style='text-align:right'>Size</th></tr></thead>";
+            const body = document.createElement("tbody");
+
+            sorted.forEach(entry => {
+                const tr = document.createElement("tr");
+                tr.className = "entry";
+
+                const name = document.createElement("td");
+                name.textContent = iconFor(entry) + "  " + entry.name;
+
+                const type = document.createElement("td");
+                type.textContent = entry.type === "dir" ? "File Folder" : "File";
+
+                const size = document.createElement("td");
+                size.className = "size";
+                size.textContent = entry.type === "file" ? formatSize(entry.size) : "";
+
+                tr.append(name, type, size);
+                tr.addEventListener("dblclick", () => go(entry.path));
+                tr.addEventListener("click", () => {
+                    body.querySelectorAll("tr").forEach(r => r.style.background = "");
+                    tr.style.background = "#dbeafe";
+                });
+                body.appendChild(tr);
+            });
+
+            if (!sorted.length) {
+                const tr = document.createElement("tr");
+                const td = document.createElement("td");
+                td.colSpan = 3;
+                td.textContent = "This folder is empty.";
+                tr.appendChild(td);
+                body.appendChild(tr);
+            }
+
+            table.appendChild(body);
+            paneEl.appendChild(table);
+
+            const dirs = sorted.filter(e => e.type === "dir").length;
+            statusEl.textContent = `${sorted.length} object(s)  |  ${dirs} folder(s)`;
+        }
+
+        async function renderFile(entry) {
+            if (entry.size > MAX_VIEW_BYTES) {
+                showNotice(`<b>${entry.name}</b> is ${formatSize(entry.size)}, which is too large to preview here.<br>Open it on GitHub instead.`);
+                statusEl.textContent = formatSize(entry.size);
+                return;
+            }
+
+            const text = await request(entry.download_url, "text");
+
+            if (text.includes("\u0000")) {
+                showNotice(`<b>${entry.name}</b> is a binary file and can't be previewed.`);
+                statusEl.textContent = formatSize(entry.size);
+                return;
+            }
+
+            const lines = text.replace(/\r\n/g, "\n").split("\n");
+            if (lines.length > 1 && lines[lines.length - 1] === "") lines.pop();
+
+            paneEl.innerHTML = "";
+            const viewer = document.createElement("div");
+            viewer.className = "viewer";
+
+            const gutter = document.createElement("pre");
+            gutter.className = "gutter";
+            gutter.textContent = lines.map((_, i) => i + 1).join("\n");
+
+            const code = document.createElement("pre");
+            code.className = "code";
+            code.textContent = lines.join("\n");
+
+            viewer.append(gutter, code);
+            paneEl.appendChild(viewer);
+            paneEl.scrollTop = 0;
+            paneEl.scrollLeft = 0;
+
+            statusEl.textContent = `${entry.name}  |  ${lines.length} lines  |  ${formatSize(entry.size)}`;
+        }
+
+        async function show(path) {
+            const mine = ++token;
+            statusEl.textContent = "Loading…";
+
+            try {
+                const data = await contents(path);
+                if (mine !== token) return;
+
+                current = path;
+                if (Array.isArray(data)) renderDir(path, data);
+                else await renderFile(data);
+            } catch (err) {
+                if (mine !== token) return;
+                current = path;
+                showNotice(describeError(err));
+                statusEl.textContent = "Error";
+            }
+
+            if (mine !== token) return;
+            updateToolbar();
+            markSelected(current);
+        }
+
+        function go(path) {
+            if (path === current && paneEl.firstChild) return;
+            history.push(current);
+            show(path);
+        }
+
+        function treeRow(label, path, depth, hasChildren) {
+            const li = document.createElement("li");
+            const row = document.createElement("div");
+            row.className = "tree-row";
+            row.dataset.path = path;
+            row.style.setProperty("--depth", depth);
+
+            const arrow = document.createElement("span");
+            arrow.className = "tree-arrow";
+            arrow.textContent = hasChildren ? "▶" : "";
+
+            const text = document.createElement("span");
+            text.textContent = (depth === 0 ? "📂 " : "📁 ") + label;
+
+            row.append(arrow, text);
+            li.appendChild(row);
+
+            const children = document.createElement("ul");
+            li.appendChild(children);
+
+            let loaded = false;
+
+            async function expand() {
+                if (!loaded) {
+                    loaded = true;
+                    try {
+                        const data = await contents(path);
+                        sortEntries(data).filter(e => e.type === "dir").forEach(dir => {
+                            children.appendChild(treeRow(dir.name, dir.path, depth + 1, true));
+                        });
+                        if (!children.childElementCount) arrow.textContent = "";
+                    } catch (err) {
+                        loaded = false;
+                    }
+                }
+                li.classList.add("open");
+                if (arrow.textContent) arrow.textContent = "▼";
+            }
+
+            function collapse() {
+                li.classList.remove("open");
+                if (arrow.textContent) arrow.textContent = "▶";
+            }
+
+            row.addEventListener("click", async () => {
+                go(path);
+                if (li.classList.contains("open") && path !== "") collapse();
+                else await expand();
+            });
+
+            row.expand = expand;
+            return li;
+        }
+
+        function start() {
+            treeEl.innerHTML = "";
+            const root = document.createElement("ul");
+            const rootNode = treeRow(NAME, "", 0, true);
+            root.appendChild(rootNode);
+            treeEl.appendChild(root);
+
+            rootNode.querySelector(".tree-row").expand();
+            show("");
+        }
+
+        backBtn.addEventListener("click", () => {
+            if (history.length) show(history.pop());
+        });
+
+        upBtn.addEventListener("click", () => {
+            if (current !== "") go(parentOf(current));
+        });
+
+        return { start };
+    })();
+
     const terminal = document.getElementById("terminal-content");
     const terminalForm = document.getElementById("terminal-form");
     const terminalInput = document.getElementById("terminal-input");
     const output = terminal.querySelector(".terminal-output");
 
     const commands = {
-        help: () => "Available commands:\n  help       List commands\n  about      About this project\n  date       Show current date\n  dir        List virtual files\n  ver        Show simulated Windows version\n  echo TEXT  Print text\n  cls        Clear the screen\n  whoami     Show current user",
+        help: () => "Available commands:\n  help       List commands\n  about      About this project\n  repo       Show repository link\n  date       Show current date\n  dir        List virtual files\n  ver        Show simulated Windows version\n  echo TEXT  Print text\n  cls        Clear the screen\n  whoami     Show current user",
         about: () => "Http-Cerver: a custom HTTP server written in C.\nFrontend: HTML + CSS + JavaScript.\nNo external JavaScript libraries required.",
+        repo: () => "https://github.com/YanisBelkacemi/Http-Cerver",
         date: () => new Date().toString(),
-        dir: () => " Directory of C:\\\\Users\\\\Yanis\n\n main.html\n readme.txt\n projects\\\n\n 3 File(s)",
+        dir: () => " Directory of C:\\Users\\Yanis\n\n main.html\n readme.txt\n projects\\\n\n 3 File(s)",
         ver: () => "Microsoft Windows XP [Version 5.1.2600] (simulation)",
         whoami: () => "desktop\\yanis",
-        cls: () => "",
         echo: args => args.join(" ")
     };
 
@@ -796,9 +1167,7 @@ Type "help" to see available commands.</div>
             output.textContent = "";
         } else {
             const fn = commands[command];
-            const result = fn
-                ? fn(parts)
-                : "'" + command + "' is not recognized as an internal or external command.";
+            const result = fn ? fn(parts) : "'" + command + "' is not recognized as an internal or external command.";
 
             const resultLine = document.createElement("div");
             resultLine.className = "terminal-output";
@@ -810,7 +1179,6 @@ Type "help" to see available commands.</div>
         terminal.scrollTop = terminal.scrollHeight;
     });
 
-    // Escape closes the Start menu; Alt+F4 closes the active simulated window.
     document.addEventListener("keydown", e => {
         if (e.key === "Escape") startMenu.classList.add("hidden");
 
@@ -824,4 +1192,3 @@ Type "help" to see available commands.</div>
 
 </body>
 </html>
-```

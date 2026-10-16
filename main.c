@@ -8,7 +8,6 @@ int main()
 	router_init();
 	store_route(main_page());
 	store_route(postpage());
-	store_route(main_pagetwo());
 	Socket_initalize();
 	
 	while(1){
