@@ -8,9 +8,8 @@ int main()
 {
 	router_init();
 	store_route(main_page());
-	store_route(postpage());
 	store_route(trie_postpage());
-	store_route(error());
+	//store_route(error());
 	Socket_initalize();
 	
 	while(1){

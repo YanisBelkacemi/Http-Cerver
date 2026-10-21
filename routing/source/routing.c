@@ -36,7 +36,18 @@ route_struct* main_page(){
 route_struct* postpage(){
 
 	route_struct* request =  malloc(sizeof(route_struct));
-	request->route = "/post";
+	request->route = "/posts";
+	request->method = "POST";
+	request->file = "templates/main.html";
+
+	return request;
+
+}
+
+route_struct* postpage2(){
+
+	route_struct* request =  malloc(sizeof(route_struct));
+	request->route = "/users";
 	request->method = "POST";
 	request->file = "templates/main.html";
 
@@ -46,11 +57,13 @@ route_struct* postpage(){
 route_struct* trie_postpage(){
 	
 	route_struct* request =  malloc(sizeof(route_struct));
-	request->route = "/trie";
+	request->route = "/api";
 	request->method = "POST";
 	request->file = "templates/main.html";
-	request->children = malloc(2*sizeof(*request->children));
+	request->children_num = 2;
+	request->children = malloc(sizeof(request->children_num));
 	request->children[0] = postpage();
+	request->children[1] = postpage2();
 	return request;
 
 }

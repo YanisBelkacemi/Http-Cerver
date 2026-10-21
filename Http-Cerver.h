@@ -20,6 +20,7 @@ struct route_struct {
 	char* method;
 	char* file;
 	route_struct** children;
+	int children_num;
 };
 
 

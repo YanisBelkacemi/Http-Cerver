@@ -9,7 +9,7 @@ NEXT STEP :
 	
 	- routing (DONE)
 
-	-adding a TRIE routing sys
+	- adding a TRIE routing sys (gotta fix the Parent route being overwritten) (DONE)
 
 	- finish the POST method Routing 
 
@@ -356,25 +356,36 @@ void store_route(route_struct* request){
 		return;
 	}
 
-	
-	route_struct* new_route = malloc(sizeof(*new_route));
-	if (new_route == NULL){
-		return;
-	}
-	if (request->children != NULL){
-	size_t len = strlen(request->children[0]->route) + strlen(request->route) + 1;
-	new_route->route = malloc(len);
-	snprintf(new_route->route , len , "%s%s" , request->children[0]->route , request->route);
-	}else{
-		new_route->route = request->route;
-	}
-	size_t index = hash(new_route->route , bucket->capacity);
-	new_route->method = request->method;
-	new_route->file = request->file;
-	bucket->routes[index] = new_route ;
-	printf("Registering route: %s\n", new_route->route);
-	printf("Method: %s\n", new_route->method);
 
+	if (request->children != NULL){
+
+		for (int i = 0 ; i< request->children_num ; ++i){
+		route_struct* new_route = malloc(sizeof(*new_route));
+		if (new_route == NULL){
+			return;
+		}
+		size_t len = strlen(request->children[i]->route) + strlen(request->route) + 1;
+		new_route->route = malloc(len);
+		snprintf( new_route->route, len, "%s%s", request->route, request->children[i]->route);
+		size_t index = hash(new_route->route , bucket->capacity);
+		new_route->method = request->children[i]->method;
+		new_route->file = request->children[i]->file;
+		bucket->routes[index] = new_route ;
+		printf("Registering route: %s\n", new_route->route);
+		printf("Method: %s\n", new_route->method);
+	}
+	}
+	route_struct* parent_route = malloc(sizeof(*parent_route));
+	if (parent_route == NULL){
+			return;
+		}
+	parent_route->route = request->route;
+	parent_route->method = request->method;
+	parent_route->file = request->file;
+	size_t index = hash(request->route , bucket->capacity);
+	bucket->routes[index] = parent_route ;
+	printf("Registering route: %s\n", parent_route->route);
+	printf("Method: %s\n", parent_route->method);
 }
 
 
