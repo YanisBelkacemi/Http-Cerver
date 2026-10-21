@@ -6,5 +6,5 @@
 route_struct* main_page();
 route_struct* postpage();
 route_struct* error();
-
+route_struct* trie_postpage();
 #endif

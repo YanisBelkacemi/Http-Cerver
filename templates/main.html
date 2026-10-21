@@ -557,6 +557,7 @@ body {
 This desktop is served by a custom HTTP server written in C.
 
 Open "Http-Cerver" to browse its source code.
+The files are loaded live from GitHub.
 
 Try opening Command Prompt and typing "help".
 
@@ -842,8 +843,9 @@ Type "help" to see available commands.</div>
     const repo = (() => {
         const OWNER = "YanisBelkacemi";
         const NAME = "Http-Cerver";
-        const API = `https://api.github.com/repos/${OWNER}/${NAME}/contents`;
+        const BRANCH = "main";
         const MAX_VIEW_BYTES = 400 * 1024;
+        const IMAGE_EXT = new Set(["png", "jpg", "jpeg", "gif", "ico", "bmp", "webp", "svg"]);
 
         const treeEl = document.getElementById("repo-tree");
         const paneEl = document.getElementById("repo-pane");
@@ -852,8 +854,9 @@ Type "help" to see available commands.</div>
         const backBtn = document.getElementById("repo-back");
         const upBtn = document.getElementById("repo-up");
 
-        const cache = new Map();
+        const fileCache = new Map();
         const history = [];
+        let index = null;
         let current = "";
         let token = 0;
 
@@ -863,10 +866,11 @@ Type "help" to see available commands.</div>
             gif: "🖼️", ico: "🖼️", svg: "🖼️"
         };
 
-        function iconFor(entry) {
-            if (entry.type === "dir") return "📁";
-            const lower = entry.name.toLowerCase();
+        function iconFor(node) {
+            if (node.type === "dir") return "📁";
+            const lower = node.name.toLowerCase();
             if (lower === "makefile" || lower === "cmakelists.txt") return "⚙️";
+            if (lower.startsWith(".git")) return "🔧";
             const ext = lower.includes(".") ? lower.split(".").pop() : "";
             return fileIcons[ext] || "📄";
         }
@@ -886,49 +890,111 @@ Type "help" to see available commands.</div>
             return i === -1 ? "" : path.slice(0, i);
         }
 
-        async function request(url, as) {
-            const key = as + url;
-            if (cache.has(key)) return cache.get(key);
-
-            const res = await fetch(url, as === "json" ? { headers: { Accept: "application/vnd.github+json" } } : undefined);
-            if (!res.ok) {
-                const err = new Error("HTTP " + res.status);
-                err.status = res.status;
-                err.rateLimited = res.status === 429 || (res.status === 403 && res.headers.get("x-ratelimit-remaining") === "0");
-                throw err;
-            }
-
-            const data = as === "json" ? await res.json() : await res.text();
-            cache.set(key, data);
-            return data;
-        }
-
-        function contents(path) {
-            const encoded = path.split("/").filter(Boolean).map(encodeURIComponent).join("/");
-            return request(encoded ? `${API}/${encoded}` : API, "json");
-        }
-
-        function sortEntries(list) {
+        function sorted(list) {
             return [...list].sort((a, b) => {
                 if (a.type !== b.type) return a.type === "dir" ? -1 : 1;
                 return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
             });
         }
 
-        function showNotice(html) {
+        async function getJSON(url) {
+            const res = await fetch(url);
+            if (!res.ok) {
+                const err = new Error("HTTP " + res.status);
+                err.rateLimited = res.status === 429 || (res.status === 403 && res.headers.get("x-ratelimit-remaining") === "0");
+                throw err;
+            }
+            return res.json();
+        }
+
+        async function getText(url) {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            return res.text();
+        }
+
+        function buildIndex(entries) {
+            const map = new Map();
+            const root = { path: "", name: NAME, type: "dir", size: 0, children: [] };
+            map.set("", root);
+
+            function ensureDir(path) {
+                if (map.has(path)) return map.get(path);
+                const node = { path, name: path.split("/").pop(), type: "dir", size: 0, children: [] };
+                map.set(path, node);
+                ensureDir(parentOf(path)).children.push(node);
+                return node;
+            }
+
+            entries.forEach(entry => {
+                if (entry.type === "dir") {
+                    ensureDir(entry.path);
+                    return;
+                }
+                const node = { path: entry.path, name: entry.path.split("/").pop(), type: "file", size: entry.size || 0 };
+                map.set(entry.path, node);
+                ensureDir(parentOf(entry.path)).children.push(node);
+            });
+
+            return { root, map };
+        }
+
+        async function loadFromGitHub() {
+            const data = await getJSON(`https://api.github.com/repos/${OWNER}/${NAME}/git/trees/${BRANCH}?recursive=1`);
+            return data.tree
+                .filter(item => item.type === "blob" || item.type === "tree")
+                .map(item => ({ path: item.path, type: item.type === "tree" ? "dir" : "file", size: item.size }));
+        }
+
+        async function loadFromJsDelivr() {
+            const data = await getJSON(`https://data.jsdelivr.com/v1/packages/gh/${OWNER}/${NAME}@${BRANCH}?structure=flat`);
+            return data.files.map(file => ({ path: file.name.replace(/^\//, ""), type: "file", size: file.size }));
+        }
+
+        async function loadIndex() {
+            let entries;
+            try {
+                entries = await loadFromGitHub();
+            } catch (err) {
+                entries = await loadFromJsDelivr();
+            }
+            return buildIndex(entries);
+        }
+
+        function encodePath(path) {
+            return path.split("/").map(encodeURIComponent).join("/");
+        }
+
+        async function loadFile(path) {
+            if (fileCache.has(path)) return fileCache.get(path);
+
+            const enc = encodePath(path);
+            let text;
+            try {
+                text = await getText(`https://raw.githubusercontent.com/${OWNER}/${NAME}/${BRANCH}/${enc}`);
+            } catch (err) {
+                text = await getText(`https://cdn.jsdelivr.net/gh/${OWNER}/${NAME}@${BRANCH}/${enc}`);
+            }
+
+            fileCache.set(path, text);
+            return text;
+        }
+
+        function showNotice(html, retry) {
             paneEl.innerHTML = "";
             const box = document.createElement("div");
             box.className = "notice";
             box.innerHTML = html;
-            paneEl.appendChild(box);
-        }
 
-        function describeError(err) {
-            if (err.rateLimited) {
-                return "<b>GitHub API rate limit reached.</b><br>Anonymous requests are limited per hour. Try again later.";
+            if (retry) {
+                const btn = document.createElement("button");
+                btn.textContent = "Retry";
+                btn.style.cssText = "margin-top:12px;padding:5px 18px;cursor:pointer";
+                btn.addEventListener("click", retry);
+                box.append(document.createElement("br"), btn);
             }
-            if (err.status === 404) return "<b>Not found.</b><br>This path doesn't exist in the repository.";
-            return "<b>Couldn't load this location.</b><br>Check your internet connection and try again.";
+
+            paneEl.appendChild(box);
         }
 
         function updateToolbar() {
@@ -943,8 +1009,8 @@ Type "help" to see available commands.</div>
             });
         }
 
-        function renderDir(path, entries) {
-            const sorted = sortEntries(entries);
+        function renderDir(node) {
+            const entries = sorted(node.children);
             paneEl.innerHTML = "";
 
             const table = document.createElement("table");
@@ -952,7 +1018,7 @@ Type "help" to see available commands.</div>
             table.innerHTML = "<thead><tr><th>Name</th><th>Type</th><th style='text-align:right'>Size</th></tr></thead>";
             const body = document.createElement("tbody");
 
-            sorted.forEach(entry => {
+            entries.forEach(entry => {
                 const tr = document.createElement("tr");
                 tr.className = "entry";
 
@@ -975,7 +1041,7 @@ Type "help" to see available commands.</div>
                 body.appendChild(tr);
             });
 
-            if (!sorted.length) {
+            if (!entries.length) {
                 const tr = document.createElement("tr");
                 const td = document.createElement("td");
                 td.colSpan = 3;
@@ -987,22 +1053,30 @@ Type "help" to see available commands.</div>
             table.appendChild(body);
             paneEl.appendChild(table);
 
-            const dirs = sorted.filter(e => e.type === "dir").length;
-            statusEl.textContent = `${sorted.length} object(s)  |  ${dirs} folder(s)`;
+            const dirs = entries.filter(e => e.type === "dir").length;
+            statusEl.textContent = `${entries.length} object(s)  |  ${dirs} folder(s)`;
         }
 
-        async function renderFile(entry) {
-            if (entry.size > MAX_VIEW_BYTES) {
-                showNotice(`<b>${entry.name}</b> is ${formatSize(entry.size)}, which is too large to preview here.<br>Open it on GitHub instead.`);
-                statusEl.textContent = formatSize(entry.size);
+        async function renderFile(node) {
+            const ext = node.name.includes(".") ? node.name.split(".").pop().toLowerCase() : "";
+
+            if (IMAGE_EXT.has(ext)) {
+                showNotice(`<b>${node.name}</b> is an image and can't be previewed here.`);
+                statusEl.textContent = formatSize(node.size);
                 return;
             }
 
-            const text = await request(entry.download_url, "text");
+            if (node.size > MAX_VIEW_BYTES) {
+                showNotice(`<b>${node.name}</b> is ${formatSize(node.size)}, which is too large to preview here.`);
+                statusEl.textContent = formatSize(node.size);
+                return;
+            }
+
+            const text = await loadFile(node.path);
 
             if (text.includes("\u0000")) {
-                showNotice(`<b>${entry.name}</b> is a binary file and can't be previewed.`);
-                statusEl.textContent = formatSize(entry.size);
+                showNotice(`<b>${node.name}</b> is a binary file and can't be previewed.`);
+                statusEl.textContent = formatSize(node.size);
                 return;
             }
 
@@ -1026,24 +1100,27 @@ Type "help" to see available commands.</div>
             paneEl.scrollTop = 0;
             paneEl.scrollLeft = 0;
 
-            statusEl.textContent = `${entry.name}  |  ${lines.length} lines  |  ${formatSize(entry.size)}`;
+            statusEl.textContent = `${node.name}  |  ${lines.length} lines  |  ${formatSize(node.size)}`;
         }
 
         async function show(path) {
             const mine = ++token;
+            const node = index.map.get(path);
+
+            if (!node) {
+                showNotice("<b>Not found.</b><br>This path doesn't exist in the repository.");
+                return;
+            }
+
             statusEl.textContent = "Loading…";
+            current = path;
 
             try {
-                const data = await contents(path);
-                if (mine !== token) return;
-
-                current = path;
-                if (Array.isArray(data)) renderDir(path, data);
-                else await renderFile(data);
+                if (node.type === "dir") renderDir(node);
+                else await renderFile(node);
             } catch (err) {
                 if (mine !== token) return;
-                current = path;
-                showNotice(describeError(err));
+                showNotice("<b>Couldn't load this file.</b><br>Check your internet connection and try again.", () => show(path));
                 statusEl.textContent = "Error";
             }
 
@@ -1058,68 +1135,64 @@ Type "help" to see available commands.</div>
             show(path);
         }
 
-        function treeRow(label, path, depth, hasChildren) {
+        function treeRow(node, depth) {
             const li = document.createElement("li");
             const row = document.createElement("div");
             row.className = "tree-row";
-            row.dataset.path = path;
+            row.dataset.path = node.path;
             row.style.setProperty("--depth", depth);
+
+            const subdirs = sorted(node.children).filter(c => c.type === "dir");
 
             const arrow = document.createElement("span");
             arrow.className = "tree-arrow";
-            arrow.textContent = hasChildren ? "▶" : "";
+            arrow.textContent = subdirs.length ? "▶" : "";
 
             const text = document.createElement("span");
-            text.textContent = (depth === 0 ? "📂 " : "📁 ") + label;
+            text.textContent = (depth === 0 ? "📂 " : "📁 ") + node.name;
 
             row.append(arrow, text);
             li.appendChild(row);
 
             const children = document.createElement("ul");
+            subdirs.forEach(dir => children.appendChild(treeRow(dir, depth + 1)));
             li.appendChild(children);
 
-            let loaded = false;
-
-            async function expand() {
-                if (!loaded) {
-                    loaded = true;
-                    try {
-                        const data = await contents(path);
-                        sortEntries(data).filter(e => e.type === "dir").forEach(dir => {
-                            children.appendChild(treeRow(dir.name, dir.path, depth + 1, true));
-                        });
-                        if (!children.childElementCount) arrow.textContent = "";
-                    } catch (err) {
-                        loaded = false;
-                    }
-                }
-                li.classList.add("open");
-                if (arrow.textContent) arrow.textContent = "▼";
+            function setOpen(open) {
+                li.classList.toggle("open", open);
+                if (subdirs.length) arrow.textContent = open ? "▼" : "▶";
             }
 
-            function collapse() {
-                li.classList.remove("open");
-                if (arrow.textContent) arrow.textContent = "▶";
-            }
-
-            row.addEventListener("click", async () => {
-                go(path);
-                if (li.classList.contains("open") && path !== "") collapse();
-                else await expand();
+            row.addEventListener("click", () => {
+                go(node.path);
+                setOpen(!li.classList.contains("open") || node.path === "");
             });
 
-            row.expand = expand;
+            li.setOpen = setOpen;
             return li;
         }
 
-        function start() {
+        async function start() {
             treeEl.innerHTML = "";
-            const root = document.createElement("ul");
-            const rootNode = treeRow(NAME, "", 0, true);
-            root.appendChild(rootNode);
-            treeEl.appendChild(root);
+            statusEl.textContent = "Loading repository…";
+            showNotice("Loading repository…");
 
-            rootNode.querySelector(".tree-row").expand();
+            try {
+                index = await loadIndex();
+            } catch (err) {
+                showNotice("<b>Couldn't reach GitHub.</b><br>Check your internet connection, then retry.", start);
+                statusEl.textContent = "Error";
+                return;
+            }
+
+            const rootList = document.createElement("ul");
+            const rootNode = treeRow(index.root, 0);
+            rootList.appendChild(rootNode);
+            treeEl.appendChild(rootList);
+            rootNode.setOpen(true);
+
+            history.length = 0;
+            current = "";
             show("");
         }
 

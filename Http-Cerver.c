@@ -7,7 +7,11 @@
 NEXT STEP :
 	- Change the method in the http request into an Enum of methods (DONE)
 	
-	- routing
+	- routing (DONE)
+
+	-adding a TRIE routing sys
+
+	- finish the POST method Routing 
 
 */
 #include <stdio.h>
@@ -27,6 +31,10 @@ enum methods {
 	PUT,
 	ERROR
 };
+
+
+
+
 
 
 
@@ -343,15 +351,29 @@ size_t hash(const char* route , size_t capacity){
 
 //storing routes in a hash map
 void store_route(route_struct* request){
-	size_t index = hash(request->route , bucket->capacity);
+	if(request == NULL){
+		printf("request in NULL");
+		return;
+	}
+
+	
 	route_struct* new_route = malloc(sizeof(*new_route));
 	if (new_route == NULL){
 		return;
 	}
-	new_route->route = request->route;
+	if (request->children != NULL){
+	size_t len = strlen(request->children[0]->route) + strlen(request->route) + 1;
+	new_route->route = malloc(len);
+	snprintf(new_route->route , len , "%s%s" , request->children[0]->route , request->route);
+	}else{
+		new_route->route = request->route;
+	}
+	size_t index = hash(new_route->route , bucket->capacity);
 	new_route->method = request->method;
 	new_route->file = request->file;
 	bucket->routes[index] = new_route ;
+	printf("Registering route: %s\n", new_route->route);
+	printf("Method: %s\n", new_route->method);
 
 }
 
